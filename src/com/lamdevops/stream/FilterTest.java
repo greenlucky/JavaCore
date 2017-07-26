@@ -4,13 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -47,46 +41,12 @@ public class FilterTest
     }
 
     @Test
-    public void flatMap() throws Exception {
-        String[][] data = new String[][]{{"a", "b"}, {"c", "d"}, {"e", "f"}};
-
-        //Stream<String[]>
-        Stream<String[]> temp = Arrays.stream(data);
-        Stream<String> words = temp.flatMap(w -> Arrays.stream(w));
-
-        print(words);
+    public void notNull() throws Exception {
+        Stream<String> language = Stream.of("java", "python", "node", null, "ruby", null, "php");
+        language.filter(Objects::nonNull).forEach(System.out::println);
     }
 
-    @Test
-    public void flatMapPlus() throws Exception {
-        List<Integer> together = Stream.of(Arrays.asList(1, 2), Arrays.asList(3, 4)) // Stream of List<Integer>
-                .flatMap(List::stream)
-                .map(integer -> integer + 1)
-                .collect(Collectors.toList());
-        print(together.stream());
-    }
-
-    @Test
-    public void countElement() throws Exception {
-        List<String> items =
-                Arrays.asList("apple", "apple", "banana",
-                        "apple", "orange", "banana", "papaya");
-        Map<String, Long> result = items.stream().collect(
-                Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        Map<String, Long> finalMap = new LinkedHashMap<>();
-
-        result.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue())
-        .forEachOrdered(e -> finalMap.put(e.getKey(), e.getValue()));
-
-        System.out.println(finalMap);
-    }
-
-
-
-    public void print(Stream<?> strs) {
-        strs.forEach(w -> {
-            System.out.println(w);
-        });
+    public static void print(Stream<?> strs) {
+        strs.forEach(System.out::println);
     }
 }
