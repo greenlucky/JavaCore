@@ -1,15 +1,11 @@
 package com.lamdevops.stream.forkjoin;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Spliterator;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Future;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by lamdevops on 8/7/17.
@@ -36,6 +32,32 @@ public class StreamForker<T> {
             consumer.finish();
         }
         return consumer;
+    }
+
+    private ForkingStreamConsumer<T> build() {
+        List<BlockingQueue<T>> queues = new ArrayList<>();
+
+        Map<Object, Future<?>> actions =
+                forks.entrySet().stream().reduce(
+                  new HashMap<Object, Future<?>>(),
+                        (map, e) -> {
+                            map.put(e.getKey(),
+                                    getOperationResult(queues, e.getValue()));
+                            return map;
+                        },
+                        (m1, m2) -> {
+                            m1.putAll(m2);
+                            return m1;
+                        });
+        return new ForkingStreamConsumer<>(queues, actions);
+    }
+
+    private Future<?> getOperationResult(List<BlockingQueue<T>> queues, Function<Stream<T>, ?> f) {
+        BlockingQueue<T> queue = new LinkedBlockingDeque<>();
+        queues.add(queue);
+        Spliterator<T> spliterator = new BlockingQueuesSlipterator<>(queue);
+        Stream<T> source = StreamSupport.stream(spliterator, false);
+        return CompletableFuture.supplyAsync(() -> f.apply(source));
     }
 
     public static interface Results{
@@ -81,7 +103,37 @@ public class StreamForker<T> {
 
         @Override
         public boolean tryAdvance(Consumer<? super T> action) {
+            T t;
+            while (true) {
+                try {
+                    t = q.take();
+                    break;
+                }catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
+            if(t != ForkingStreamConsumer.END_OF_STEAM) {
+                action.accept(t);
+                return true;
+            }
+
+            return false;
+        }
+
+        @Override
+        public Spliterator<T> trySplit() {
+            return null;
+        }
+
+        @Override
+        public long estimateSize() {
+            return 0;
+        }
+
+        @Override
+        public int characteristics() {
+            return 0;
         }
     }
 }
