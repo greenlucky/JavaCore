@@ -1,4 +1,4 @@
-package com.lamdevops.stream;
+package com.lamdevops.stream.groupby;
 
 import com.lamdevops.stream.pojo.Item;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import static com.lamdevops.stream.FilterTest.print;
 /**
  * Created by lam.nm on 7/26/2017.
  */
-public class GroupBy
+public class GroupByItem
 {
     @Test
     public void countElement() throws Exception {
