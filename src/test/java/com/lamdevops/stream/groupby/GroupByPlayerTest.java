@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -55,6 +56,20 @@ public class GroupByPlayerTest {
     public void testImportCSVGroupingByDynamicFilesIsNull() {
         File currentDir = new File("src/main/resources/files/playerfile.csv");
         Map<List<String>, List<Player>> mapPlayer = groupByPlayer.importCSVGroupByFiles(currentDir.getAbsolutePath().toString(), null);
+        mapPlayer.entrySet().stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void testImportCSVGroupingByDynamicFilesToSet() {
+        File currentDir = new File("src/main/resources/files/playerfile.csv");
+        Map<List<String>, Set<Player>> mapPlayer = groupByPlayer.importCSVGroupByFilesToSet(currentDir.getAbsolutePath().toString(), "getYear", "getTeamID");
+        mapPlayer.entrySet().stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void testImportCSVGroupingByDynamicFilesToSumSalary() {
+        File currentDir = new File("src/main/resources/files/playerfile.csv");
+        Map<List<String>, Integer> mapPlayer = groupByPlayer.importCSVGroupByFilesAndSumSallary(currentDir.getAbsolutePath().toString(), Player::getSalary, "getYear", "getTeamID");
         mapPlayer.entrySet().stream().forEach(System.out::println);
     }
 }
