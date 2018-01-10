@@ -2,10 +2,13 @@ package com.lamdevops.performance;
 
 public class Concatenation {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         operator();
         stringBuilder();
         stringBuffer();
+
+        System.gc();
+        Thread.sleep(100000);
     }
 
     private static void operator() {
