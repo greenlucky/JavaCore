@@ -152,7 +152,9 @@ public class example1 {
     }
 
     /**
+     * *****************************************************************
      * CompletableFuture with thenApplyAsync
+     * *****************************************************************
      */
     @Test
     public void supplyAsyncAndThenApplyAsync() throws Exception {
@@ -176,4 +178,37 @@ public class example1 {
                 .thenCompose(user -> userService.getCreditRating(user));
         System.out.println(result.get());
     }
+
+    @Test
+    public void supplyAndThenCombine() throws Exception {
+        System.out.println("Retriveing weight.");
+        CompletableFuture<Double> weightInKgFuture = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 65.0;
+        });
+
+        System.out.println("Retrieving height.");
+        CompletableFuture<Double> heightInCmFuture = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 177.8;
+        });
+
+        System.out.println("Calculate BMI.");
+        CompletableFuture<Double> combined = weightInKgFuture
+                .thenCombine(heightInCmFuture, (weightInKg, heightInCm) -> {
+                    Double heightInMeter = heightInCm/100;
+                    return weightInKg/(heightInMeter*heightInMeter);
+                });
+
+        System.out.println("Your BMI is -" + combined.get());
+    }
+
 }
