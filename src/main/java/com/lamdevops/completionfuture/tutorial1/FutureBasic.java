@@ -4,13 +4,10 @@ package com.lamdevops.completionfuture.tutorial1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.function.Supplier;
 
-public class example1 {
+public class FutureBasic {
 
     private ProductService productService;
     private UserService userService;
@@ -24,10 +21,10 @@ public class example1 {
     /**
      * First test we'll create simple, which method .get() will block
      * the thread util .complete()
-     * @throws Exception
+     * @throws FutureException
      */
     @Test
-    public void simpleCompletableFuture() throws Exception {
+    public void simpleCompletableFuture() throws ExecutionException, InterruptedException {
         CompletableFuture<String> completableFuture = new CompletableFuture<String>();
         completableFuture.complete("Future's result");
         String result = completableFuture.get();
@@ -38,10 +35,10 @@ public class example1 {
      * This test run completableFuture with async,
      * which is print the message.
      *
-     * @throws Exception
+     * @throws FutureException
      */
     @Test
-    public void runAsync() throws Exception {
+    public void runAsync() throws ExecutionException, InterruptedException {
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             try {
                 TimeUnit.SECONDS.sleep(10);
@@ -55,7 +52,7 @@ public class example1 {
     }
 
     @Test
-    public void runAsyncReturnValue() throws Exception {
+    public void runAsyncReturnValue() throws ExecutionException, InterruptedException {
         CompletableFuture<String> future = CompletableFuture.supplyAsync(new Supplier<String>() {
             @Override
             public String get() {
@@ -75,7 +72,7 @@ public class example1 {
     }
 
     @Test
-    public void runAsyncReturnValueWithExecutor() throws Exception {
+    public void runAsyncReturnValueWithExecutor() throws ExecutionException, InterruptedException {
         Executor executor = Executors.newFixedThreadPool(10);
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             try {
@@ -91,7 +88,7 @@ public class example1 {
     }
 
     @Test
-    public void transformingAndActionV1() throws Exception {
+    public void transformingAndActionV1() throws ExecutionException, InterruptedException {
         CompletableFuture<String> names = CompletableFuture.supplyAsync(() -> {
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -108,7 +105,7 @@ public class example1 {
     }
 
     @Test
-    public void transformingAndActionSequence() throws Exception {
+    public void transformingAndActionSequence() throws ExecutionException, InterruptedException {
         CompletableFuture<String> welComeText = CompletableFuture.supplyAsync(() -> {
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -157,7 +154,7 @@ public class example1 {
      * *****************************************************************
      */
     @Test
-    public void supplyAsyncAndThenApplyAsync() throws Exception {
+    public void supplyAsyncAndThenApplyAsync() throws ExecutionException, InterruptedException {
         CompletableFuture<String> res = CompletableFuture
                 .supplyAsync(() -> "Lam Nguyen")
                 .thenApplyAsync(result -> "Hi " + result);
@@ -166,14 +163,14 @@ public class example1 {
     }
 
     @Test
-    public void supplyAndThenApply() throws Exception {
+    public void supplyAndThenApply() throws ExecutionException, InterruptedException {
         CompletableFuture<CompletableFuture<Double>> result = userService.getUserDetail(1)
                 .thenApply(user -> userService.getCreditRating(user));
         System.out.println(result.get().get());
     }
 
     @Test
-    public void supplyAndThenCompose() throws Exception {
+    public void supplyAndThenCompose() throws ExecutionException, InterruptedException {
         CompletableFuture<Double> result = userService.getUserDetail(1)
                 .thenCompose(user -> userService.getCreditRating(user));
         System.out.println(result.get());
