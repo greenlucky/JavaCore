@@ -1,6 +1,6 @@
-package com.lamdevops.completionfuture.bestpricefinder.Shop;
+package com.lamdevops.completionfuture.tut3_bestpricefinder.Shop;
 
-import com.lamdevops.completionfuture.bestpricefinder.models.AsynShop;
+import com.lamdevops.completionfuture.tut3_bestpricefinder.models.AsynShop;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.Future;

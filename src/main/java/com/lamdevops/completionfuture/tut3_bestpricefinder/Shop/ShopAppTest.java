@@ -1,4 +1,4 @@
-package com.lamdevops.completionfuture.bestpricefinder.Shop;
+package com.lamdevops.completionfuture.tut3_bestpricefinder.Shop;
 
 import org.junit.jupiter.api.Test;
 

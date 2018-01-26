@@ -1,11 +1,11 @@
-package com.lamdevops.completionfuture.bestpricefinder.models;
+package com.lamdevops.completionfuture.tut3_bestpricefinder.models;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
-import static com.lamdevops.completionfuture.bestpricefinder.models.Utils.delay;
-import static com.lamdevops.completionfuture.bestpricefinder.models.Utils.format;
+import static com.lamdevops.completionfuture.tut3_bestpricefinder.models.Utils.delay;
+import static com.lamdevops.completionfuture.tut3_bestpricefinder.models.Utils.format;
 
 /**
  * Created by lamdevops on 8/4/17.

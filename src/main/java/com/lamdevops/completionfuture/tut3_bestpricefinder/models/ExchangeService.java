@@ -1,6 +1,6 @@
-package com.lamdevops.completionfuture.bestpricefinder.models;
+package com.lamdevops.completionfuture.tut3_bestpricefinder.models;
 
-import static com.lamdevops.completionfuture.bestpricefinder.models.Utils.delay;
+import static com.lamdevops.completionfuture.tut3_bestpricefinder.models.Utils.delay;
 
 /**
  * Created by lamdevops on 8/5/17.

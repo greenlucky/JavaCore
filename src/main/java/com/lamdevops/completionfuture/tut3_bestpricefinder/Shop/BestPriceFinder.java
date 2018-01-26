@@ -1,8 +1,8 @@
-package com.lamdevops.completionfuture.bestpricefinder.Shop;
+package com.lamdevops.completionfuture.tut3_bestpricefinder.Shop;
 
-import com.lamdevops.completionfuture.bestpricefinder.models.Discount;
-import com.lamdevops.completionfuture.bestpricefinder.models.Quote;
-import com.lamdevops.completionfuture.bestpricefinder.models.Shop;
+import com.lamdevops.completionfuture.tut3_bestpricefinder.models.Discount;
+import com.lamdevops.completionfuture.tut3_bestpricefinder.models.Quote;
+import com.lamdevops.completionfuture.tut3_bestpricefinder.models.Shop;
 
 import java.util.Arrays;
 import java.util.List;

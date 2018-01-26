@@ -1,4 +1,4 @@
-package com.lamdevops.completionfuture.bestpricefinder.models;
+package com.lamdevops.completionfuture.tut3_bestpricefinder.models;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

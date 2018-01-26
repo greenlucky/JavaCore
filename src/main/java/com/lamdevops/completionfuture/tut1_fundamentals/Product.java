@@ -1,4 +1,4 @@
-package com.lamdevops.completionfuture.tutorial1;
+package com.lamdevops.completionfuture.tut1_fundamentals;
 
 public class Product {
     private Long id;

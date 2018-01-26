@@ -1,7 +1,7 @@
-package com.lamdevops.completionfuture.bestpricefinder.models;
+package com.lamdevops.completionfuture.tut3_bestpricefinder.models;
 
 import java.util.Random;
-import static com.lamdevops.completionfuture.bestpricefinder.models.Utils.*;
+import static com.lamdevops.completionfuture.tut3_bestpricefinder.models.Utils.*;
 
 /**
  * Created by lamdevops on 8/4/17.

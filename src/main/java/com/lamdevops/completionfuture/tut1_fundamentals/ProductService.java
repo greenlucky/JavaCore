@@ -1,4 +1,4 @@
-package com.lamdevops.completionfuture.tutorial1;
+package com.lamdevops.completionfuture.tut1_fundamentals;
 
 
 import java.util.ArrayList;

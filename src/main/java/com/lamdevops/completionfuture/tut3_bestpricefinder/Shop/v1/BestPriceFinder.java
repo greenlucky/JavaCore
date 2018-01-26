@@ -1,7 +1,7 @@
-package com.lamdevops.completionfuture.bestpricefinder.Shop.v1;
+package com.lamdevops.completionfuture.tut3_bestpricefinder.Shop.v1;
 
-import com.lamdevops.completionfuture.bestpricefinder.models.ExchangeService;
-import com.lamdevops.completionfuture.bestpricefinder.models.v1.Shop;
+import com.lamdevops.completionfuture.tut3_bestpricefinder.models.ExchangeService;
+import com.lamdevops.completionfuture.tut3_bestpricefinder.models.v1.Shop;
 
 import java.util.ArrayList;
 import java.util.Arrays;
