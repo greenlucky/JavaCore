@@ -1,0 +1,1 @@
+Now you don’t have to scan the loop for evidence of filtering and counting. The method names tell you right away what the code intends to do.

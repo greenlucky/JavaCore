@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.lamdevops.stream.FilterTest.print;
+import static com.lamdevops.stream.filter.FilterTest.print;
 
 /**
  * Created by lam.nm on 7/26/2017.
