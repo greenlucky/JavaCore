@@ -1,0 +1,1 @@
+Java stream 8, this is the example for java stream.
