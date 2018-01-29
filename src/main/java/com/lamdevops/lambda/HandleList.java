@@ -39,4 +39,11 @@ public class HandleList {
         lstNames.sort(Comparator.reverseOrder());
         lstNames.forEach(System.out::println);
     }
+
+    @Test
+    public void testReplaceList() throws Exception {
+        List<Integer> lstInts = Arrays.asList(1, 2, 3, 4, 5);
+        lstInts.replaceAll(i -> i * 2);
+        System.out.println(lstInts);
+    }
 }
