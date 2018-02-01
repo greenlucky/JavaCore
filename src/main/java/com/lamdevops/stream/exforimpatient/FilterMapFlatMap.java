@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -81,6 +82,16 @@ public class FilterMapFlatMap {
     public void distinctWords() {
         Stream<String> uniqueWords = Stream.of("merrily", "merrily", "merrily", "gently").distinct();
         uniqueWords.forEach(System.out::println);
+    }
+
+    @Test
+    public void compareLongestWord() {
+        List<String> words = Arrays.asList("Distribute", "Completable", "Java", "Responsibility", "Nationality");
+        Stream<String> longestOrderAsc= words.stream().sorted(Comparator.comparing(String::length));
+        longestOrderAsc.forEach(System.out::println);
+        System.out.println("");
+        Stream<String> longestOrderDesc = words.stream().sorted(Comparator.comparing(String::length).reversed());
+        longestOrderDesc.forEach(System.out::println);
     }
 
 }
