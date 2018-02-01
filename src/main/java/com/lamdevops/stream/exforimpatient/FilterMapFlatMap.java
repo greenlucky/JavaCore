@@ -6,10 +6,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FilterMapFlatMap {
@@ -93,5 +92,47 @@ public class FilterMapFlatMap {
         Stream<String> longestOrderDesc = words.stream().sorted(Comparator.comparing(String::length).reversed());
         longestOrderDesc.forEach(System.out::println);
     }
+
+    @Test
+    public void peekPower() {
+        Stream<Double> powers = Stream.iterate(1.0, p -> p * 2)
+                .peek(e -> System.out.println("Fetching " + e))
+                .limit(20);
+        powers.findFirst();
+    }
+
+    @Test
+    public void peekWithRandom() {
+        List<Double> powers = Stream.generate(Math::random)
+                .peek(r -> System.out.println(r))
+                .limit(20).collect(Collectors.toList());
+        powers.size();
+    }
+
+    /**
+     * Reduces section
+     */
+    @Test
+    public void maxReduce() {
+        List<String> words = Arrays.asList("Distribute", "Completable", "Java", "Responsibility", "Nationality");
+        Optional<String> largest = words.stream()
+                .max(String::compareToIgnoreCase);
+        System.out.println("largest: " + largest.orElseGet(String::new));
+    }
+
+    @Test
+    public void startWithQFindFirst() {
+        List<String> words = Arrays.asList("Distribute", "Completable", "QJava", "Responsibility", "QNationality");
+        Optional<String> startWithQ = words.parallelStream().filter( s -> s.startsWith("Q")).findFirst();
+        System.out.println("Word start with Q: " + startWithQ.orElse("There is no have the word start with Q"));
+    }
+
+    @Test
+    public void startWithQFindAny() {
+        List<String> words = Arrays.asList("Distribute", "Completable", "QJava", "Responsibility", "QNationality");
+        Optional<String> startWithQ = words.parallelStream().filter( s -> s.startsWith("Q")).findAny();
+        System.out.println("Word start with Q: " + startWithQ.orElse("There is no have the word start with Q"));
+    }
+
 
 }
