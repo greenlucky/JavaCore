@@ -27,5 +27,4 @@ hs_err_pid*
 .idea/misc.xml
 .idea/workspace.xml
 JavaCore.iml
-.idea/vcs.xml
-.idea/modules.xml
+.idea/
