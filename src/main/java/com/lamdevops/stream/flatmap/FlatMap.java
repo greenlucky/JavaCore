@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.lamdevops.stream.filter.FilterTest.print;
+import static com.lamdevops.stream.FilterTest.print;
 
 /**
  * Created by lam.nm on 7/26/2017.

@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FilterMapFlatMap {
@@ -83,4 +83,29 @@ public class FilterMapFlatMap {
         uniqueWords.forEach(System.out::println);
     }
 
+    @Test
+    public void compareLongestWord() {
+        List<String> words = Arrays.asList("Distribute", "Completable", "Java", "Responsibility", "Nationality");
+        Stream<String> longestOrderAsc= words.stream().sorted(Comparator.comparing(String::length));
+        longestOrderAsc.forEach(System.out::println);
+        System.out.println("");
+        Stream<String> longestOrderDesc = words.stream().sorted(Comparator.comparing(String::length).reversed());
+        longestOrderDesc.forEach(System.out::println);
+    }
+
+    @Test
+    public void peekPower() {
+        Stream<Double> powers = Stream.iterate(1.0, p -> p * 2)
+                .peek(e -> System.out.println("Fetching " + e))
+                .limit(20);
+        powers.findFirst();
+    }
+
+    @Test
+    public void peekWithRandom() {
+        List<Double> powers = Stream.generate(Math::random)
+                .peek(r -> System.out.println(r))
+                .limit(20).collect(Collectors.toList());
+        powers.size();
+    }
 }
