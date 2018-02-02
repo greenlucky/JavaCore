@@ -27,4 +27,3 @@ JavaCore.iml
 .idea/
 lib/
 target/*
-src/test/java/com/lamdevops/desginpattern/
