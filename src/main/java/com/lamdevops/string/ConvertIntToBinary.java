@@ -2,7 +2,15 @@ package com.lamdevops.string;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -55,39 +63,91 @@ public class ConvertIntToBinary {
     }
 
     @Test
-    public void testPrintSeqBinaryExcludeInputString3() {
-        sequenceBinary(3, "001, 010");
+    public void testPrintSeqBinaryExcludeInputString20() {
+        sequenceBinary(16, 20, "0000101000, 1000001000");
     }
 
     @Test
-    public void testPrintSeqBinaryExcludeInputString4() {
-        sequenceBinary(4, "0010, 0100");
+    public void testPrintSeqBinaryExcludeInputString20One() {
+        long start = System.currentTimeMillis();
+        CompletableFuture<Integer> completableFuture1 = sequenceBinary(1, (int) Math.pow(2, 20), 20, "0000101000, 1000001000");
+        int size = 0;
+        try {
+            size  = completableFuture1.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("Executive time: " + (end - start));
+        System.out.println(size);
     }
 
     @Test
-    public void testPrintSeqBinaryExcludeInputString5() {
-        sequenceBinary(5, "00101, 01000");
+    public void testPrintSeqBinaryExcludeInputString22() {
+        sequenceBinary(4, 24, "0000101000, 1000001000");
     }
 
     @Test
-    public void testPrintSeqBinaryExcludeInputString8() {
-        sequenceBinary(8, "00101000, 00001000");
+    public void testPrintSeqBinaryExcludeInputString22One() {
+        long start = System.currentTimeMillis();
+        CompletableFuture<Integer> completableFuture1 = sequenceBinary(1, (int) Math.pow(2, 24), 20, "0000101000, 1000001000");
+        int size = 0;
+        try {
+            size  = completableFuture1.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("Executive time: " + (end - start));
+        System.out.println(size);
     }
 
-    @Test
-    public void testPrintSeqBinaryExcludeInputString10() {
-        sequenceBinary(10, "0000101000, 1000001000");
-    }
 
-    private void sequenceBinary(int numOfStr, String exStr) {
-        IntStream.range(1, (int) Math.pow(2, numOfStr)).forEach(i -> {
-            String bina = intToBinary(i, numOfStr);
-            //System.out.println(bina);
-            if(!exStr.contains(bina)){
-                System.out.println(bina);
+    private void sequenceBinary(int div, int numOfStr, String exStr) {
+        long start = System.currentTimeMillis();
+        int num = (int) Math.pow(2, numOfStr);
+        int parties = num/div;
+        List<CompletableFuture<Integer>> completableFutures = new ArrayList<>();
+
+        for(int i = 0; i < div ; i++) {
+            CompletableFuture<Integer> completableFuture = sequenceBinary(1 + (parties * i), parties * (i + 1) , numOfStr, exStr);
+            completableFutures.add(completableFuture);
+        }
+
+        int size =completableFutures.stream().mapToInt(i -> {
+            try {
+                return i.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
-        });
+            return 0;
+        }).sum();
+        long end = System.currentTimeMillis();
+        System.out.println("Executive time: " + (end - start));
+        System.out.println(size);
     }
 
+    private CompletableFuture<Integer> sequenceBinary(int from, int to, int numOfStr, String exStr) {
+        CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(() -> {
+            int i = from;
+            int count = 0;
+            while (i <= to) {
+                String bina = intToBinary(i, numOfStr);
+                if(i % 100000 == 0) {
+                    System.out.println("Num of binary: " + i);
+                }
+                i++;
+                count++;
+            }
+            return count;
+        });
 
+        return completableFuture;
+    }
 }
