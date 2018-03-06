@@ -129,17 +129,74 @@ public class MessageAsync {
         assertTrue(cf2.join().endsWith(" from applyToEither"));
     }
 
+    /**
+     * 11. Consuming Result of Either of Two Completed Stages
+     */
     @Test
-    public void acceptToEitherExample() {
+    public void acceptEitherExample() {
         String original = "Message";
         StringBuilder result = new StringBuilder();
         CompletableFuture<Void> cf = CompletableFuture.completedFuture(original)
                 .thenApplyAsync(s -> deplayedLowerCase(s))
                 .acceptEither(CompletableFuture.completedFuture(original).thenApplyAsync(s -> deplayedLowerCase(s)),
-                        s -> result.append("acceptEither"));
+                        s -> result.append(s).append(" ").append("acceptEither"));
         cf.join();
+        System.out.println(result.toString());
         assertTrue("Result was empty", result.toString().endsWith("acceptEither"));
     }
+
+    /**
+     * 12. Running a Runnable upon Completion of Both Stages
+     * This example shows how the dependent CompletableFuture
+     * that executes a Runnable triggers upon completion of
+     * both of two stages. Note all below stages run synchronously,
+     * where a stage first converts a message string to uppercase,
+     * then a second converts the same message string to lowercase.
+     */
+    @Test
+    public void runAfterBothExample() {
+        String orginal = "Message";
+        StringBuilder result = new StringBuilder();
+        CompletableFuture.completedFuture(orginal).thenApply(String::toUpperCase).runAfterBoth(
+            CompletableFuture.completedFuture(orginal).thenApply(String::toLowerCase), () -> result.append("done"));
+        System.out.println(result.toString());
+        assertTrue("Result was empty", result.length() > 0);
+    }
+
+    /**
+     * 13. Accepting Results of Both Stages in a Biconsumer
+     * Instead of executing a Runnable upon completion of both stages,
+     * using BiConsumer allows processing of their results if needed:
+     */
+    @Test
+    public void thenAcceptBothExample() {
+        String original = "Message";
+        StringBuffer result = new StringBuffer();
+        CompletableFuture.completedFuture(original).thenApply(String::toUpperCase)
+                .thenAcceptBoth(
+                        CompletableFuture.completedFuture(original)
+                        .thenApply(String::toLowerCase),
+                        (s1, s2) -> result.append(s1 + s2));
+
+        assertEquals("MESSAGEmessage", result.toString());
+    }
+
+    /**
+     * 14. Applying a Bifunction on Results of Both Stages (i.e. Combining Their Results)
+     * If the dependent CompletableFuture is intended to combine the results of two previous
+     * CompletableFutures by applying a function on them and returning a result, we can use
+     * the method thenCombine(). The entire pipeline is synchronous, so getNow() at the end
+     * would retrieve the final result, which is the concatenation of the uppercase and the
+     * lowercase outcomes.
+     */
+    @Test
+    public void thenCombineExample() {
+        String original = "Message";
+        CompletableFuture<String> cf = CompletableFuture.completedFuture(original)
+                .thenApply(s -> deplayedLowerCase(s))
+                .thenCombine(CompletableFuture.completedFuture(original).thenApply(s -> deplayedLowerCase(s)), (s1, s2) -> s1 + s2);
+    }
+
 
     private String deplayedLowerCase(String s) {
         randomSleep();
