@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MessageAsync {
+public class CompletableFuture20Example {
 
     private ExecutorService executor = Executors.newFixedThreadPool(3, new ThreadFactory() {
         int count = 1;
