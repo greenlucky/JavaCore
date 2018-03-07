@@ -1,4 +1,4 @@
-package com.lamdevops.stream.exforimpatient;
+package com.lamdevops.collection.stream.exforimpatient;
 
 import org.junit.jupiter.api.Test;
 

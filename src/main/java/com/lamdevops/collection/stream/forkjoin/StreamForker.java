@@ -1,4 +1,4 @@
-package com.lamdevops.stream.forkjoin;
+package com.lamdevops.collection.stream.forkjoin;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -55,7 +55,7 @@ public class StreamForker<T> {
     private Future<?> getOperationResult(List<BlockingQueue<T>> queues, Function<Stream<T>, ?> f) {
         BlockingQueue<T> queue = new LinkedBlockingDeque<>();
         queues.add(queue);
-        Spliterator<T> spliterator = new BlockingQueuesSpliterator<>(queue);
+        Spliterator<T> spliterator = new BlockingQueuesSlipterator<>(queue);
         Stream<T> source = StreamSupport.stream(spliterator, false);
         return CompletableFuture.supplyAsync(() -> f.apply(source));
     }
@@ -94,10 +94,10 @@ public class StreamForker<T> {
         }
     }
 
-    private static class BlockingQueuesSpliterator<T> implements Spliterator<T> {
+    private static class BlockingQueuesSlipterator<T> implements Spliterator<T> {
         private final BlockingQueue<T> q;
 
-        public BlockingQueuesSpliterator(BlockingQueue<T> q) {
+        public BlockingQueuesSlipterator(BlockingQueue<T> q) {
             this.q = q;
         }
 

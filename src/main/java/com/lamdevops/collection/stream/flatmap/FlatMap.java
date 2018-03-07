@@ -1,4 +1,4 @@
-package com.lamdevops.stream.flatmap;
+package com.lamdevops.collection.stream.flatmap;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.lamdevops.stream.FilterTest.print;
+import static com.lamdevops.collection.stream.FilterTest.print;
 
 /**
  * Created by lam.nm on 7/26/2017.

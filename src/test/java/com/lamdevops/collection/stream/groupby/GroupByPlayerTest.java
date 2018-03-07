@@ -1,17 +1,13 @@
-package com.lamdevops.stream.groupby;
+package com.lamdevops.collection.stream.groupby;
 
-import com.lamdevops.stream.pojo.Player;
+import com.lamdevops.collection.stream.pojo.Player;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 public class GroupByPlayerTest {
 

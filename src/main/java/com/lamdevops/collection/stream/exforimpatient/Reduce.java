@@ -1,7 +1,5 @@
-package com.lamdevops.stream.exforimpatient;
+package com.lamdevops.collection.stream.exforimpatient;
 
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

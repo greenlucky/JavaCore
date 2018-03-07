@@ -1,9 +1,8 @@
-package com.lamdevops.stream.exforimpatient;
+package com.lamdevops.collection.stream.exforimpatient;
 
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class Generation {

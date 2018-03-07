@@ -1,6 +1,5 @@
-package com.lamdevops.stream;
+package com.lamdevops.collection.stream;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.lamdevops.stream.filter;
+package com.lamdevops.collection.stream;
 
 import org.junit.jupiter.api.Test;
 

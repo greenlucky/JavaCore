@@ -1,4 +1,4 @@
-package com.lamdevops.stream.exforimpatient;
+package com.lamdevops.collection.stream.exforimpatient;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

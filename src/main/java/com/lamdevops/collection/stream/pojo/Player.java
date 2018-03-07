@@ -1,4 +1,4 @@
-package com.lamdevops.stream.pojo;
+package com.lamdevops.collection.stream.pojo;
 
 public class Player {
     private int year;

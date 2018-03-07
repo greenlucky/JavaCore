@@ -69,7 +69,7 @@ public class DelayExecutor {
     public void completeOnTimeout() throws ExecutionException, InterruptedException {
         CompletableFuture<String> future =
                 doWork("JavaSampleApproach")
-                .completeOnTimeout("JavaTechnogoy", TIMEOUT3, TimeUnit.SECONDS)
+                .completeOnTimeout("JavaTechnology", TIMEOUT3, TimeUnit.SECONDS)
                 .whenComplete((v, th) -> {
                     if(th == null) {
                         System.out.println("The result is: " + v);

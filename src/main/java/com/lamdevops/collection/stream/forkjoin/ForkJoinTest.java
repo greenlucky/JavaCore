@@ -1,4 +1,4 @@
-package com.lamdevops.stream.forkjoin;
+package com.lamdevops.collection.stream.forkjoin;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
-package com.lamdevops.stream.groupby;
+package com.lamdevops.collection.stream.groupby;
 
-import com.lamdevops.stream.pojo.Player;
+import com.lamdevops.collection.stream.pojo.Player;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

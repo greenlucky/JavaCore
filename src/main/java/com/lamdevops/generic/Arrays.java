@@ -1,6 +1,6 @@
 package com.lamdevops.generic;
 
-import com.lamdevops.stream.pojo.Item;
+import com.lamdevops.collection.stream.pojo.Item;
 
 import java.util.ArrayList;
 

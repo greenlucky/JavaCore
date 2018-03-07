@@ -1,4 +1,4 @@
-package com.lamdevops.stream.exforimpatient;
+package com.lamdevops.collection.stream.exforimpatient;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class StreamWithFile {
 

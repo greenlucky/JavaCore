@@ -1,6 +1,6 @@
-package com.lamdevops.stream;
+package com.lamdevops.collection.stream.groupby;
 
-import com.lamdevops.stream.pojo.Item;
+import com.lamdevops.collection.stream.pojo.Item;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -8,12 +8,12 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.lamdevops.stream.FilterTest.print;
+import static com.lamdevops.collection.stream.FilterTest.print;
 
 /**
  * Created by lam.nm on 7/26/2017.
  */
-public class GroupBy
+public class GroupByItem
 {
     @Test
     public void countElement() throws Exception {
