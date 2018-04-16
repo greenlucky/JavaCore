@@ -1,6 +1,4 @@
-package com.lamdevops.annotation.muti_annotations;
-
-import org.junit.jupiter.api.Test;
+package com.lamdevops.annotation.muti_annotations.authorsbook;
 
 import java.util.Arrays;
 

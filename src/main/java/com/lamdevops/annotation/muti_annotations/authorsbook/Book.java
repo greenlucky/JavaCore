@@ -1,4 +1,4 @@
-package com.lamdevops.annotation.muti_annotations;
+package com.lamdevops.annotation.muti_annotations.authorsbook;
 
 /**
  * Created by lamdevops on 8/6/17.

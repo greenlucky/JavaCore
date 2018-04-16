@@ -64,7 +64,7 @@ public class ConvertIntToBinary {
 
     @Test
     public void testPrintSeqBinaryExcludeInputString20() {
-        sequenceBinary(16, 20, "0000101000, 1000001000");
+        sequenceBinary(8, 20, "0000101000, 1000001000");
     }
 
     @Test
@@ -139,9 +139,9 @@ public class ConvertIntToBinary {
             int count = 0;
             while (i <= to) {
                 String bina = intToBinary(i, numOfStr);
-                if(i % 100000 == 0) {
+               /* if(i % 100000 == 0) {
                     System.out.println("Num of binary: " + i);
-                }
+                }*/
                 i++;
                 count++;
             }

@@ -1,4 +1,4 @@
-package com.lamdevops.annotation.muti_annotations;
+package com.lamdevops.annotation.muti_annotations.authorsbook;
 
 import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
